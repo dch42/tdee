@@ -27,7 +27,6 @@ Invoke like so:
     - Height (feet.inches)
 - `-w, --weight`
     - Weight (lbs) 
-        - *if called without 'd', will print all printable files in dl dir*
 - `-y, --age`
     - Age (years)
 - `-s, --sex`
