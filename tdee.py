@@ -8,17 +8,15 @@ import argparse
 parser = argparse.ArgumentParser(
     description="Calculate BMR and track calories.")
 parser.add_argument(
-    "-he", "--height", type=float, required=True, help='Height (feet.inches)')
+    "-he", "--height", type=float, help='Height (feet.inches)')
 parser.add_argument(
-    "-w", "--weight", type=float, required=True, help='Weight (lb)')
+    "-w", "--weight", type=float, help='Weight (lb)')
 parser.add_argument(
-    "-y", "--age", type=int, required=True, help='Age (years)')
+    "-y", "--age", type=int, help='Age (years)')
 parser.add_argument(
-    "-s", "--sex", type=str, required=True, help='Sex (m/f)')
+    "-s", "--sex", type=str, help='Sex (m/f)')
 parser.add_argument(
-    "-a", "--activity", type=str, required=False, help='Activity level (range 1 ~ 5, sedentary to very active)')
-parser.add_argument(
-    "-n", "--name", type=str, required=False, help='Name (optional)')
+    "-a", "--activity", type=str, help='Activity level (range 1 ~ 5, sedentary to very active)')
 
 args = parser.parse_args()
 
@@ -64,12 +62,23 @@ def katch_mcardle(bmr):
     return tdee
 
 
+def arg_check():
+    """Check args"""
+    a = args.age if args.age else input("Please enter your age: ")
+    s = args.sex if args.sex else input("Please enter your sex (m/f): ")
+    h = args.height if args.height else input(
+        "Please enter your height (feet.inches): ")
+    w = args.weight if args.weight else input(
+        "Please enter your weight (lbs): ")
+    h, w = to_metric(float(h), float(w))
+    return int(a), str(s), float(h), float(w)
+
+
 if __name__ == '__main__':
-    a, s = args.age, args.sex
-    h, w = to_metric(args.height, args.weight)
-    print("Calculating basal metabolic rate (BMR)...")
+    a, s, h, w = arg_check()
+    print("\nCalculating basal metabolic rate (BMR)...")
     bmr = harris_benedict(w, h, s, a)
     print("Calculating total daily energy expenditure (TDEE)...")
     tdee = katch_mcardle(bmr)
     print(
-        f"\nResults:\n\n\tYour BMR is ~{int(bmr)} calories.\n\tYour TDEE is ~{int(tdee)} calories.\n")
+        f"\nResults:\n\n\tBMR: ~{int(bmr)} calories\n\tTDEE: ~{int(tdee)} calories\n")
