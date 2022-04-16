@@ -6,7 +6,7 @@ import argparse
 
 # define and parse args
 parser = argparse.ArgumentParser(
-    description="Calculate BMR and track calories.")
+    description="Calculate BMR and TDEE.")
 parser.add_argument(
     "-he", "--height", type=float, help='Height (feet.inches)')
 parser.add_argument(
