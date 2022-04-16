@@ -22,6 +22,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+# activity levels and associated multipliers for katch-mcardle formula
 activity = {
     '1': ["sedentary (little or no exercise)", 1.2],
     '2': ["light activity (light exercise/sports 1 to 3 days per week)", 1.375],
@@ -71,4 +72,4 @@ if __name__ == '__main__':
     print("Calculating total daily energy expenditure (TDEE)...")
     tdee = katch_mcardle(bmr)
     print(
-        f"\nYour BMR is ~{int(bmr)} calories.\nYour TDEE is ~{int(tdee)} calories.\n")
+        f"\nResults:\n\n\tYour BMR is ~{int(bmr)} calories.\n\tYour TDEE is ~{int(tdee)} calories.\n")
