@@ -17,7 +17,7 @@ chmod +x ./tdee.py
 Invoke like so:
 
 ~~~
-./tdee.py [-h] [-he HEIGHT] [-w WEIGHT] [-y AGE] [-s SEX] [-a ACTIVITY]
+tdee.py [-h] [-he HEIGHT] [-w WEIGHT] [-y AGE] [-s SEX] [-a ACTIVITY] [-l LOSE]
 ~~~
 
 ### Options
@@ -33,3 +33,5 @@ Invoke like so:
     - Sex (m/f)
 - `-a, --activity`
     - Average activity level (range 1~5, sedentary to very active)
+- `-l, --lose`
+    - Desired number of pounds to lose per week
