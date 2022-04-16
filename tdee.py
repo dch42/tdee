@@ -17,6 +17,8 @@ parser.add_argument(
     "-s", "--sex", type=str, help='Sex (m/f)')
 parser.add_argument(
     "-a", "--activity", type=str, help='Activity level (range 1 ~ 5, sedentary to very active)')
+parser.add_argument(
+    "-l", "--lose", type=str, help='Number of pounds to lose per week')
 
 args = parser.parse_args()
 
@@ -70,15 +72,20 @@ def arg_check():
         "Please enter your height (feet.inches): ")
     w = args.weight if args.weight else input(
         "Please enter your weight (lbs): ")
+    l = args.lose if args.lose else input(
+        "Please enter desired weight loss per week (lbs): ")
     h, w = to_metric(float(h), float(w))
-    return int(a), str(s), float(h), float(w)
+    return int(a), str(s), float(h), float(w), float(l)
 
 
 if __name__ == '__main__':
-    a, s, h, w = arg_check()
+    a, s, h, w, l = arg_check()
     print("\nCalculating basal metabolic rate (BMR)...")
     bmr = harris_benedict(w, h, s, a)
     print("Calculating total daily energy expenditure (TDEE)...")
     tdee = katch_mcardle(bmr)
+    goal = tdee - (l*500)
     print(
         f"\nResults:\n\n\tBMR: ~{int(bmr)} calories\n\tTDEE: ~{int(tdee)} calories\n")
+    print(
+        f"To lose {l} lbs/week, you will need to consume {int(goal)} calories/day.\nGood luck!\n")
