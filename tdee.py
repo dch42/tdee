@@ -84,8 +84,10 @@ if __name__ == '__main__':
     bmr = harris_benedict(w, h, s, a)
     print("Calculating total daily energy expenditure (TDEE)...")
     tdee = katch_mcardle(bmr)
-    goal = tdee - (l*500)
+    if args.lose:
+        goal = tdee - (l*500)
     print(
         f"\nResults:\n\n\tBMR: ~{int(bmr)} calories\n\tTDEE: ~{int(tdee)} calories\n")
-    print(
-        f"To lose {l} lbs/week, you will need to consume {int(goal)} calories/day.\nGood luck!\n")
+    if args.lose:
+        print(
+            f"To lose {l} lbs/week, you will need to consume {int(goal)} calories/day.\nGood luck!\n")
